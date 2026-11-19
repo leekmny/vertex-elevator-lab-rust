@@ -1,6 +1,6 @@
 # GitHub 배포 안내
 
-소스와 Windows 실행 프로그램을 함께 공개합니다. 저장소에는 소스·문서·테스트를 두고, 실행 ZIP은 GitHub Release에 첨부합니다. 이 문서와 로컬 파일을 준비하는 것만으로 GitHub에 게시되지는 않습니다.
+이 문서는 Rust 포팅판의 Windows 실행 ZIP을 빌드하고 GitHub Release에 첨부하는 절차를 안내합니다. 공개 다운로드는 [원본 TypeScript판 v1.0.0 릴리스](https://github.com/leekmny/vertex-elevator-lab/releases/tag/v1.0.0)에서 제공됩니다.
 
 ## 게시 전 확인
 
@@ -10,13 +10,13 @@
 
 ## 소스에 포함할 파일
 
-`src`, `desktop`, `scripts`, `tests`, `docs`, `examples`, `README.md`, `CHANGELOG.md`, `LICENSE`, `package.json`, `package-lock.json`과 빌드·테스트 설정을 포함합니다. `index.html`도 빌드 진입점이므로 필요합니다.
+`rust`, `src`, `desktop`, `scripts`, `tests`, `docs`, `examples`, `README.md`, `CHANGELOG.md`, `LICENSE`, `package.json`, `package-lock.json`과 빌드·테스트 설정을 포함합니다. `index.html`도 빌드 진입점이므로 필요합니다.
 
 `node_modules`, `dist`, `release`, 테스트 결과, `.audit-recipient`, `.desktop-build` 등의 생성·검수 파일은 Git 추적에서 제외합니다. `.gitignore`가 적용된 추적 파일 목록을 검토한 뒤 업로드합니다.
 
 ## 실행 파일 준비와 검증
 
-Windows에서 의존성을 설치한 뒤 실행합니다.
+Windows에서 [Rust 포팅판 빌드 요구사항](RUST_PORT.md#실행과-검사)을 충족한 뒤 실행합니다.
 
 ```powershell
 npm ci
@@ -27,7 +27,7 @@ npm run package:win
 npm run test:desktop
 ```
 
-`package:win`은 TypeScript 검사와 웹 빌드를 포함합니다. 결과 폴더는 `release/VERTEX-Windows`, 결과 ZIP은 `release/VERTEX-Windows.zip`입니다. 정상 실행을 확인한 뒤 ZIP의 SHA256을 생성해 같은 릴리스에 첨부합니다.
+`package:win`은 Rust WebAssembly 빌드, TypeScript 검사, 웹 빌드를 포함합니다. 결과 폴더는 `release/VERTEX-Windows`, 결과 ZIP은 `release/VERTEX-Windows.zip`입니다. 정상 실행을 확인한 뒤 ZIP의 SHA256을 생성해 같은 릴리스에 첨부합니다.
 
 ```powershell
 $zipPath = '.\release\VERTEX-Windows.zip'
@@ -38,12 +38,12 @@ $checksumPath = Join-Path (Split-Path -Parent $zipPath) 'SHA256SUMS.txt'
 
 ZIP을 다시 만들었다면 체크섬도 다시 생성해야 합니다.
 
-## v1.0.0 릴리스 초안
+## 릴리스 초안
 
 1. 검토한 소스 커밋을 공개 저장소에 업로드합니다.
-2. GitHub 저장소의 **Releases → Draft a new release**에서 해당 커밋에 `v1.0.0` 태그를 지정합니다.
-3. 제목은 `VERTEX v1.0.0 — Windows x64`로 설정합니다.
-4. [변경 기록](../CHANGELOG.md)의 v1.0.0 기능·실행 방법·한계·검증 내용을 릴리스 설명으로 사용합니다.
+2. GitHub 저장소의 **Releases → Draft a new release**에서 해당 커밋에 버전 태그를 지정합니다.
+3. 제목에 VERTEX Rust 포트, 버전, Windows x64를 명시합니다.
+4. [Rust 포팅 문서](RUST_PORT.md)를 참고해 실행 방법·한계·검증 내용을 릴리스 설명에 적습니다.
 5. 아래 두 파일을 첨부하고 우선 초안으로 저장해 검토합니다.
 
 | 첨부 파일 | 용도 |

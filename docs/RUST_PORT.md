@@ -33,7 +33,7 @@ Windows에서 `npm run package:win`은 `release/VERTEX-Windows/`와 ZIP을 생�
 ## 동일 입력으로 RECHECK 실행
 
 원본 TypeScript 기준은 `6b8d78b5b21da3b5249eb9700a7fd15590d26470`입니다. 이
-브랜치의 `src/sim`과 `src/research`에 있는 동일한 원본 함수에 고정 입력을 전달하고,
+저장소의 `src/sim`과 `src/research`에 있는 동일한 원본 함수에 고정 입력을 전달하고,
 Rust 네이티브 CLI에도 같은 입력을 전달합니다. Linux x64에서 예제를 준비합니다.
 
 ```sh

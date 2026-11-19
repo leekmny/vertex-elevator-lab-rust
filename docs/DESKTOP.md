@@ -6,11 +6,13 @@
 
 ## 서버 없는 실행 방식
 
-Electron이 함께 배포된 Chromium 창을 열고 `vertex://app/index.html`에서 묶인 Vite 자산을 읽습니다. HTTP 서버를 띄우거나 localhost 포트에 연결하지 않습니다. 커스텀 프로토콜은 표준·보안 스킴으로 등록해 ES Module Web Worker가 같은 로컬 자산에서 동작하도록 합니다. 계산 엔진은 기존 TypeScript 모듈 그대로이며 창과 별도의 Worker에서 실행합니다.
+Electron이 함께 배포된 Chromium 창을 열고 `vertex://app/index.html`에서 묶인 Vite 자산을 읽습니다. HTTP 서버를 띄우거나 localhost 포트에 연결하지 않습니다. 커스텀 프로토콜은 표준·보안 스킴으로 등록해 ES Module Web Worker가 같은 로컬 자산에서 동작하도록 합니다. 계산 엔진은 Rust로 구현되며 창과 별도의 Web Worker에서 WebAssembly로 실행합니다.
 
 렌더러는 Node.js 접근을 비활성화하고 context isolation과 sandbox를 사용합니다. 프로토콜은 배포 자산 디렉터리 안의 파일만 읽으며 외부 HTTP 요청·새 창·권한 요청은 허용하지 않습니다. 배포 파일은 Electron ASAR에 묶입니다. 내부 프로토콜을 OS에 별도로 설치할 필요는 없습니다.
 
 ## 개발자가 다시 빌드하기
+
+[Rust 포팅판 빌드 요구사항](RUST_PORT.md#실행과-검사)을 먼저 확인하세요.
 
 ```powershell
 npm ci

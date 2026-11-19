@@ -1,15 +1,17 @@
-# 엘리베이터 실험실 · VERTEX
+# 엘리베이터 실험실 · VERTEX Rust 포트
 
-[MIT License](LICENSE)로 공개하는 학습·탐구 프로젝트입니다.
+[VERTEX 엘리베이터 실험실](https://github.com/leekmny/vertex-elevator-lab)의 시뮬레이션 및 연구 엔진을 **TypeScript에서 Rust로 포팅**한 저장소입니다. 기존 React 화면과 Electron에서 Rust 엔진을 WebAssembly로 실행하며, Rust 네이티브 CLI도 제공합니다. [MIT License](LICENSE)로 공개합니다.
 
-[아키텍처](docs/ARCHITECTURE.md) · [구현 범위와 검증 상태](docs/STATUS.md) · [물리·알고리즘 모델](docs/ENGINE.md) · [실제 벤치마크](docs/BENCHMARK.md) · [변경 기록](CHANGELOG.md) · [GitHub 배포 안내](docs/GITHUB_RELEASE.md)
+- 원본 TypeScript 기준 커밋은 [`6b8d78b`](https://github.com/leekmny/vertex-elevator-lab/commit/6b8d78b5b21da3b5249eb9700a7fd15590d26470)입니다.
+- Rust 포팅 커밋 [`d051b57`](https://github.com/leekmny/vertex-elevator-lab/commit/d051b57654dc8f85fa39f879d832bab54f6afbb3)을 원본과 비교한 RECHECK에서 **22/22 시나리오**가 일치했습니다. [검증 결과](docs/verification/rust-port-parity.json) · [재현 방법](docs/RUST_PORT.md#동일-입력으로-recheck-실행)
 
-직접 움직여 보고, 비교하며 배우는 엘리베이터 실험실입니다. “가까운 차를 보내면 항상 빠를까?”, “엘리베이터를 한 대 더 늘리면 얼마나 달라질까?” 같은 궁금증을 눈으로 확인해 보세요. 건물과 승객 흐름, 운행 방식을 바꾸며 가감속·문 개폐·정원까지 계산한 움직임을 관찰할 수 있습니다. 소스와 Windows 실행 프로그램을 함께 공개하는 학습·탐구 프로젝트입니다.
+[아키텍처](docs/ARCHITECTURE.md) · [구현 범위와 검증 상태](docs/STATUS.md) · [물리·알고리즘 모델](docs/ENGINE.md) · [실제 벤치마크](docs/BENCHMARK.md) · [변경 기록](CHANGELOG.md) · [Windows 빌드·배포 안내](docs/GITHUB_RELEASE.md)
+
+직접 움직여 보고, 비교하며 배우는 엘리베이터 실험실입니다. “가까운 차를 보내면 항상 빠를까?”, “엘리베이터를 한 대 더 늘리면 얼마나 달라질까?” 같은 궁금증을 눈으로 확인해 보세요. 건물과 승객 흐름, 운행 방식을 바꾸며 가감속·문 개폐·정원까지 계산한 움직임을 관찰할 수 있습니다.
 
 ## Rust 포팅판 실행
 
-`port/rust-simulation` 브랜치는 기존 화면에서 Rust로 만든 시뮬레이션을
-WebAssembly로 실행합니다. Node.js와 Rust 1.96 이상 및
+이 저장소의 `main`에는 Rust 포트가 있습니다. Node.js와 Rust 1.96 이상 및
 `rustup target add wasm32-unknown-unknown`을 준비하세요. 로컬 Cargo가
 없으면 Linux 컨테이너가 켜진 Docker Desktop으로도 빌드할 수 있습니다.
 
@@ -23,9 +25,9 @@ npm run dev
 
 ## Windows 다운로드
 
-**[최신 Windows 배포본 받기](../../releases/latest)**
+**[원본 TypeScript판 Windows 배포본 받기](https://github.com/leekmny/vertex-elevator-lab/releases/tag/v1.0.0)**
 
-GitHub의 **Releases → Assets**에서 **`VERTEX-Windows.zip`**을 내려받으세요. 릴리스가 아직 없다면 배포본이 게시되기 전입니다. GitHub가 자동으로 제공하는 `Source code (zip)`은 소스 묶음이며, 실행 프로그램은 별도 첨부된 `VERTEX-Windows.zip`에 들어 있습니다.
+원본 저장소의 **Releases → Assets**에서 **`VERTEX-Windows.zip`**을 내려받으세요. Rust 포팅판을 Windows 실행 파일로 만들려면 이 저장소에서 [Windows 빌드 안내](docs/DESKTOP.md#개발자가-다시-빌드하기)를 따라 `npm run package:win`을 실행하세요.
 
 1. ZIP을 **폴더 전체로 압축 해제**합니다.
 2. `VERTEX-Windows` 폴더 안의 **`VERTEX.exe`**를 더블클릭합니다.
@@ -71,7 +73,7 @@ npm run dev
 출력된 로컬 주소(기본 `http://127.0.0.1:5173`)를 엽니다. 별도 API 서버·계정·클라우드 키가 필요하지 않습니다.
 
 ```powershell
-npm run build       # TypeScript 검사와 정적 배포 파일 생성
+npm run build       # Rust WebAssembly 빌드, TypeScript 검사, 정적 배포 파일 생성
 npm test            # 물리·엔진·불변량·연구 통계 검증
 npx playwright install chromium
 npm run test:e2e    # 브라우저 설정·재생·내보내기·연구 모드 검증
@@ -91,8 +93,9 @@ npm run benchmark  # 실제 반복 실행 및 측정 결과 파일 생성
 ## 프로젝트 구조
 
 ```text
+rust/                 # Rust 시뮬레이션·연구 엔진, 네이티브 CLI 및 테스트
 src/
-  sim/
+  sim/                # 원본 TypeScript 시뮬레이션과 공유 형식
     types.ts          # 모듈 전체가 공유하는 설정·승객·차량·지표 계약
     config.ts         # 기본값과 물리·서비스 설정 검증
     physics.ts        # 삼각형/사다리꼴 속도 곡선, 연속 위치 계산
@@ -130,7 +133,7 @@ docs/                 # 모델·알고리즘·실험 정의와 측정 결과
 
 연구 모드에서 층수를 20, 차량 범위를 1~6, 혼잡도를 100%, 반복 횟수를 3 이상으로 두고 같은 알고리즘 집합으로 실행하세요. 과부하 비교에는 지속 과부하 시나리오 또는 높은 기준 발생률을 사용합니다. 잔여 승객 처리 여부(Drain)와 최대 Drain 시간을 결과와 함께 보관하세요.
 
-엔진을 화면 없이 호출할 수도 있습니다.
+[Rust CLI](docs/RUST_PORT.md#동일-입력으로-recheck-실행)로 엔진을 화면 없이 호출할 수 있습니다. 원본 TypeScript 엔진을 비교용으로 실행하는 예시입니다.
 
 ```typescript
 import { defaultConfig } from './src/sim/config';
@@ -152,7 +155,7 @@ console.log(look.demandHash === eta.demandHash, look.metrics, eta.metrics);
 
 물리 계산, 손으로 검산한 단일 여정, 차량 수 1·2·3·4·8·12·20, 층수 5·20·50·100, 0%·500% 수요, 과부하 보존, 전 OD 환승, 이종 차량, 각 알고리즘 Drain, 재현성, snapshot 빈도 독립성, 통계와 내보내기를 자동 검사합니다. 사건 종료 경계에서 단일 이벤트 실행과 일괄 실행이 같은 결과를 내는지, 서로 다른 시점에 Drain을 마친 알고리즘들의 비교 세션이 끝까지 진행되는지도 검증합니다.
 
-2026-11-18 최종 검증 결과:
+아래는 원본 TypeScript판의 2026-11-18 검증 기록입니다. Rust 포트는 [RECHECK 및 추가 검사 결과](docs/verification/rust-port-parity.json)를 참조하세요.
 
 | 명령 | 결과 |
 |---|---|

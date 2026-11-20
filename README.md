@@ -1,5 +1,7 @@
 # 엘리베이터 실험실 · VERTEX Rust 포트
 
+**한국어** | [English](README.en.md)
+
 [VERTEX 엘리베이터 실험실](https://github.com/leekmny/vertex-elevator-lab)의 시뮬레이션 및 연구 엔진을 **TypeScript에서 Rust로 포팅**한 저장소입니다. 기존 React 화면과 Electron에서 Rust 엔진을 WebAssembly로 실행하며, Rust 네이티브 CLI도 제공합니다. [MIT License](LICENSE)로 공개합니다.
 
 - 원본 TypeScript 기준 커밋은 [`6b8d78b`](https://github.com/leekmny/vertex-elevator-lab/commit/6b8d78b5b21da3b5249eb9700a7fd15590d26470)입니다.

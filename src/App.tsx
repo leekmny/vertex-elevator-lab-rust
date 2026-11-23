@@ -8,7 +8,6 @@ import {
   Play,
   RotateCcw,
   Shuffle,
-  Sparkles,
   Users,
   BellRing,
 } from 'lucide-react';
@@ -191,7 +190,6 @@ export default function App() {
           </span>
           <div>
             <h1>엘리베이터 실험실</h1>
-            <p>보고, 바꾸고, 다시 움직여 보세요.</p>
           </div>
         </div>
         <button
@@ -210,6 +208,7 @@ export default function App() {
         <section className="simple-scene">
           <div className="simple-scene-header">
             <div>
+              <h2>{label}</h2>
               <span className={'simple-live ' + (running ? 'active' : '')}>
                 <i />
                 {running
@@ -218,9 +217,8 @@ export default function App() {
                     ? (metrics?.unfinished ?? 0) > 0
                       ? '관찰 종료'
                       : '운행 완료'
-                    : '잠깐 쉬는 중'}
+                    : '일시 정지'}
               </span>
-              <h2>{label}</h2>
               <p className="simple-scene-note">
                 {config.floors}층 · 엘리베이터 {config.cars}대 ·{' '}
                 {
@@ -395,10 +393,7 @@ export default function App() {
         </section>
         <aside className="simple-sidebar">
           <section className="simple-settings">
-            <div className="simple-section-title">
-              <span>01</span>
-              <h2>내 건물 만들기</h2>
-            </div>
+            <h2 className="simple-section-title">건물 설정</h2>
             <div className="simple-number-pair">
               <label>
                 건물 층수
@@ -479,19 +474,11 @@ export default function App() {
             </div>
           </section>
           <section className="simple-random">
-            <div className="simple-random-icon">
-              <Sparkles size={21} />
-            </div>
-            <h2>이번에는 다르게!</h2>
-            <p>
-              건물, 승객의 이동 패턴, 알고리즘까지
-              <br />
-              매번 다른 조합으로 구경하세요.
-            </p>
+            <h2>무작위 운행 조건</h2>
+            <p>건물, 승객 이동 패턴, 배차 알고리즘을 새로 뽑습니다.</p>
             <button className="simple-random-button" onClick={anotherRandom}>
               <Shuffle size={18} />
               랜덤 운행
-              <ArrowRight size={16} />
             </button>
             <label className="simple-repeat">
               <input

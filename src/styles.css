@@ -1413,9 +1413,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 0 26px;
+  padding: 20px 0;
   border-bottom: 1px solid #26323e;
-  margin-bottom: 26px;
+  margin-bottom: 22px;
   gap: 16px;
 }
 .simple-brand {
@@ -1424,11 +1424,10 @@ footer {
   align-items: center;
 }
 .simple-brand > span {
-  width: 48px;
-  height: 48px;
-  background: #193c33;
+  width: 38px;
+  height: 38px;
   border: 1px solid #376552;
-  border-radius: 15px;
+  border-radius: 5px;
   display: grid;
   place-items: center;
   color: #6be3ba;
@@ -1438,11 +1437,6 @@ footer {
   font-weight: 700;
   letter-spacing: -1px;
   color: #e9f0f4;
-  margin-bottom: 5px;
-}
-.simple-brand p {
-  font-size: 13px;
-  color: #8e9eac;
 }
 .simple-advanced {
   display: flex;
@@ -1484,8 +1478,8 @@ footer {
   display: flex;
   gap: 7px;
   align-items: center;
-  color: #9baab6;
-  margin-bottom: 8px;
+  color: #a9b9c4;
+  margin-top: 6px;
 }
 .simple-live i {
   width: 7px;
@@ -1498,7 +1492,6 @@ footer {
 }
 .simple-live.active i {
   background: #62dfad;
-  box-shadow: 0 0 10px #62dfad40;
 }
 .simple-app .simple-scene-header h2 {
   font-size: 18px;
@@ -1506,6 +1499,7 @@ footer {
   font-weight: 600;
   letter-spacing: -0.5px;
   line-height: 1.5;
+  word-break: keep-all;
 }
 .simple-clock {
   text-align: right;
@@ -1716,26 +1710,8 @@ footer {
   border-radius: 13px;
   padding: 21px;
 }
-.simple-section-title {
-  display: flex;
-  gap: 9px;
-  align-items: center;
-  margin-bottom: 21px;
-}
-.simple-section-title > span {
-  display: grid;
-  place-items: center;
-  background: #243a40;
-  color: #95beb2;
-  border: 1px solid #35524f;
-  border-radius: 5px;
-  font:
-    10px ui-monospace,
-    monospace;
-  width: 23px;
-  height: 23px;
-}
-.simple-app .simple-section-title h2 {
+.simple-app .simple-section-title {
+  margin-bottom: 17px;
   font-size: 16px;
   font-weight: 650;
   color: #e0ecee;
@@ -1817,49 +1793,41 @@ footer {
   color: #a5e6c4;
 }
 .simple-random {
-  background: linear-gradient(135deg, #1e332b, #19272c);
-  border: 1px solid #3c5d4c;
-  border-radius: 13px;
+  background: #15212d;
+  border: 1px solid #304250;
+  border-radius: 6px;
   padding: 21px;
 }
-.simple-random-icon {
-  color: #bcdb8e;
-  margin-bottom: 10px;
-}
 .simple-app .simple-random h2 {
-  font-size: 18px;
-  color: #e1eccc;
-  margin-bottom: 9px;
+  font-size: 16px;
+  color: #dce8ee;
+  margin-bottom: 6px;
   letter-spacing: -0.4px;
 }
 .simple-random p {
   font-size: 12px;
+  word-break: keep-all;
   line-height: 1.85;
-  color: #92b1a0;
+  color: #9fb3c4;
 }
 .simple-random-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  background: #cbe5a0;
-  border: 1px solid #cbe5a0;
-  border-radius: 8px;
+  background: #172833;
+  border: 1px solid #415665;
+  border-radius: 5px;
   width: 100%;
-  padding: 12px;
-  color: #2a4229;
+  min-height: 44px;
+  padding: 9px 12px;
+  color: #d7e6ef;
   font-weight: 700;
   font-size: 14px;
-  margin: 18px 0 15px;
-}
-.simple-random-button > svg:last-child {
-  margin-left: auto;
-}
-.simple-random-button > svg:first-child {
-  margin-right: auto;
+  margin: 12px 0;
 }
 .simple-random-button:hover {
-  background: #dbedbd;
+  background: #263b49;
 }
 .simple-repeat {
   display: flex;
@@ -1873,11 +1841,11 @@ footer {
   width: 14px;
   height: 14px;
   margin: 0;
-  accent-color: #b4d788;
+  accent-color: var(--green);
 }
 .simple-repeat small {
   font-size: 10px;
-  color: #769b86;
+  color: #9fb3c4;
   margin-left: auto;
 }
 .simple-explanation {
@@ -2042,13 +2010,9 @@ footer {
   .simple-app .simple-brand h1 {
     font-size: 22px;
   }
-  .simple-brand p {
-    font-size: 11px;
-  }
   .simple-brand > span {
     width: 42px;
     height: 42px;
-    border-radius: 12px;
   }
   .simple-advanced {
     font-size: 11px;
@@ -2115,9 +2079,6 @@ footer {
   }
   .simple-app .simple-brand h1 {
     font-size: 19px;
-  }
-  .simple-brand p {
-    font-size: 10px;
   }
   .simple-brand > span {
     width: 35px;
